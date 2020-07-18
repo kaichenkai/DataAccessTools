@@ -28,7 +28,8 @@ public class AITrafficListener extends JButton {
     //单例
     private AITrafficListener(String text, Color color){
         this.setText(text);
-        this.setBounds(ScreenSize.getWidth() / 4 - BaseConstant.CONST210, BaseConstant.CONST0, BaseConstant.CONST200, BaseConstant.CONST50);
+//        this.setBounds(ScreenSize.getWidth() / 4 - BaseConstant.CONST210, BaseConstant.CONST0, BaseConstant.CONST200, BaseConstant.CONST50);
+        this.setBounds(ScreenSize.widthRatio(0.2500) - ScreenSize.widthRatio(0.1093), ScreenSize.heightRatio(0.0100), ScreenSize.widthRatio(0.1041), ScreenSize.heightRatio(0.0462));
         this.setFont(FontClass.boldFont20);
         this.setForeground(Color.WHITE);
         this.setBorderPainted(false);//去掉边框

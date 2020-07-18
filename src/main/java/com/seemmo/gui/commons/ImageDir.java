@@ -5,6 +5,7 @@ import com.seemmo.gui.listener.AIQualityListener;
 import com.seemmo.gui.panel.AIQualityConfigPanel;
 import com.seemmo.gui.utils.ColorClass;
 import com.seemmo.gui.utils.FontClass;
+import com.seemmo.utils.ScreenSize;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,18 +29,21 @@ public class ImageDir {//单例
         //imageDataDirLabel
         imageDirLabel = new JLabel("数据文件夹: ");
         imageDirLabel.setFont(FontClass.font16);
-        imageDirLabel.setBounds(BaseConstant.CONST20, BaseConstant.CONST80, BaseConstant.CONST100, BaseConstant.CONST40);
+//        imageDirLabel.setBounds(BaseConstant.CONST20, BaseConstant.CONST80, BaseConstant.CONST100, BaseConstant.CONST40);
+        imageDirLabel.setBounds(ScreenSize.widthRatio(0.0104), ScreenSize.heightRatio(0.0670), ScreenSize.widthRatio(0.0520), ScreenSize.heightRatio(0.0370));
         //imageDirText
         imageDirText = new JTextField("");
 //        imageDirText = new JTextField("E:\\temp\\images");
         imageDirText.setFont(FontClass.font16);
         imageDirText.setToolTipText("请选择文件夹");//悬停提示信息
-        imageDirText.setBounds(BaseConstant.CONST120, BaseConstant.CONST80, BaseConstant.CONST500, BaseConstant.CONST40);
+//        imageDirText.setBounds(BaseConstant.CONST120, BaseConstant.CONST80, BaseConstant.CONST500, BaseConstant.CONST40);
+        imageDirText.setBounds(ScreenSize.widthRatio(0.0625), ScreenSize.heightRatio(0.0670), ScreenSize.widthRatio(0.2604), ScreenSize.heightRatio(0.0370));
         //imageDirSelectButton
         imageDirSelectButton = new JButton("点击选择");
         imageDirSelectButton.setFont(FontClass.font16);
         imageDirSelectButton.setForeground(Color.WHITE);//设置字体颜色
-        imageDirSelectButton.setBounds(BaseConstant.CONST660, BaseConstant.CONST80, BaseConstant.CONST100, BaseConstant.CONST40);
+//        imageDirSelectButton.setBounds(BaseConstant.CONST660, BaseConstant.CONST80, BaseConstant.CONST100, BaseConstant.CONST40);
+        imageDirSelectButton.setBounds(ScreenSize.widthRatio(0.3437), ScreenSize.heightRatio(0.0670), ScreenSize.widthRatio(0.0520), ScreenSize.heightRatio(0.0370));
         imageDirSelectButton.setBorderPainted(false);//边框
         imageDirSelectButton.setFocusPainted(false);//去掉按钮文字周围的焦点框
         imageDirSelectButton.setBackground(ColorClass.color_18a5d6);

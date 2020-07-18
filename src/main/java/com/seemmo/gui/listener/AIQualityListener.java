@@ -29,7 +29,8 @@ public class AIQualityListener extends JButton {
     //单例
     private AIQualityListener(String text, Color color) {
         this.setText(text);
-        this.setBounds(ScreenSize.getWidth() / 4 + BaseConstant.CONST10, BaseConstant.CONST0, BaseConstant.CONST200, BaseConstant.CONST50);
+        //this.setBounds(ScreenSize.getWidth() / 4 + BaseConstant.CONST10, BaseConstant.CONST0, BaseConstant.CONST200, BaseConstant.CONST50);
+        this.setBounds(ScreenSize.widthRatio(0.2500) + ScreenSize.widthRatio(0.0052), ScreenSize.heightRatio(0.0100), ScreenSize.widthRatio(0.1041), ScreenSize.heightRatio(0.0462));
         this.setForeground(Color.WHITE);
         this.setFont(FontClass.font20);
         this.setBorderPainted(false);//去掉边框

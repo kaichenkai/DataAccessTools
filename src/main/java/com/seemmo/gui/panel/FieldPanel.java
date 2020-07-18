@@ -4,6 +4,7 @@ import com.seemmo.constants.BaseConstant;
 import com.seemmo.gui.commons.accessField.*;
 import com.seemmo.gui.utils.ColorClass;
 import com.seemmo.gui.utils.FontClass;
+import com.seemmo.utils.ScreenSize;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -18,9 +19,10 @@ public class FieldPanel extends JPanel {
     //单例
     private FieldPanel() {//私有化构造方法使得该类无法在外部通过new 进行实例化
         this.setLayout(null);
-        this.setBounds(BaseConstant.CONST20, BaseConstant.CONST160,
-                ConfigPanel.instance.getWidth() - BaseConstant.CONST520,
-                ConfigPanel.instance.getHeight() - BaseConstant.CONST550);//设置坐标, 尺寸
+//        this.setBounds(BaseConstant.CONST20, BaseConstant.CONST160,
+//                ConfigPanel.instance.getWidth() - BaseConstant.CONST520,
+//                ConfigPanel.instance.getHeight() - BaseConstant.CONST550);//设置坐标, 尺寸
+        this.setBounds(ScreenSize.widthRatio(0.01), ScreenSize.heightRatio(0.1240), ScreenSize.widthRatio(0.24), ScreenSize.heightRatio(0.6));
         this.setBackground(Color.WHITE);
         this.setBorder(BorderFactory.createTitledBorder(null, " 字段匹配 ", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION, FontClass.boldFont20, ColorClass.color_18a5d6));
         this.addComponents();

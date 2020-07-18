@@ -20,9 +20,10 @@ public class ProgressDisplayPanel extends JPanel {
     private ProgressDisplayPanel(){
         this.setLayout(null);//设为空布局后,才能设置子标签的大小和位置
         this.setBorder(null);//去掉边框
-        this.setBounds(BaseConstant.CONST20, BaseConstant.CONST710,
-                ScreenSize.getWidth() / 2 - BaseConstant.CONST30,
-                BaseConstant.CONST260);//设置坐标, 尺寸
+//        this.setBounds(BaseConstant.CONST20, BaseConstant.CONST710,
+//                ScreenSize.getWidth() / 2 - BaseConstant.CONST30,
+//                BaseConstant.CONST260);//设置坐标, 尺寸
+        this.setBounds(ScreenSize.widthRatio(0.01), ScreenSize.heightRatio(0.73), ScreenSize.widthRatio(0.48), ScreenSize.heightRatio(0.16));
         this.setBackground(Color.WHITE);
         this.setBorder(BorderFactory.createTitledBorder(null, " 开始 ", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION, FontClass.boldFont20, ColorClass.color_18a5d6));
         this.addComponents();

@@ -25,6 +25,16 @@ public class ScreenSize {
     }
 
     /**
-     *
+     * 通过比例获取当前屏幕宽度
      */
+    public static int widthRatio(double ratio){
+        return (int) (screensize.getWidth() * ratio);
+    }
+
+    /**
+     * 通过比例获取当前屏幕高度
+     */
+    public static int heightRatio(double ratio){
+        return (int) (screensize.getHeight() * ratio);
+    }
 }
