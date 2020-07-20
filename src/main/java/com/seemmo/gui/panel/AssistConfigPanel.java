@@ -22,7 +22,7 @@ public class AssistConfigPanel extends JPanel {
 //        this.setBounds(BaseConstant.CONST490, BaseConstant.CONST160,
 //                ConfigPanel.instance.getWidth() - BaseConstant.CONST500,
 //                ConfigPanel.instance.getHeight() - BaseConstant.CONST550);//设置坐标, 尺寸
-        this.setBounds(ScreenSize.widthRatio(0.26), ScreenSize.heightRatio(0.1240), ScreenSize.widthRatio(0.23), ScreenSize.heightRatio(0.6));
+        this.setBounds(ScreenSize.widthRatio(0.245), ScreenSize.heightRatio(0.1240), ScreenSize.widthRatio(0.25), ScreenSize.heightRatio(0.6));
         this.setBackground(Color.WHITE);
         this.setBorder(BorderFactory.createTitledBorder(null, " 辅助配置 ", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION, FontClass.boldFont20, ColorClass.color_18a5d6));
         this.addComponents();

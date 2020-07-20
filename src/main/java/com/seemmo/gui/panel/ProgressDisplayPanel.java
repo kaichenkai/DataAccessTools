@@ -23,7 +23,7 @@ public class ProgressDisplayPanel extends JPanel {
 //        this.setBounds(BaseConstant.CONST20, BaseConstant.CONST710,
 //                ScreenSize.getWidth() / 2 - BaseConstant.CONST30,
 //                BaseConstant.CONST260);//设置坐标, 尺寸
-        this.setBounds(ScreenSize.widthRatio(0.01), ScreenSize.heightRatio(0.73), ScreenSize.widthRatio(0.48), ScreenSize.heightRatio(0.16));
+        this.setBounds(ScreenSize.widthRatio(0.01), ScreenSize.heightRatio(0.73), ScreenSize.widthRatio(0.485), ScreenSize.heightRatio(0.17));
         this.setBackground(Color.WHITE);
         this.setBorder(BorderFactory.createTitledBorder(null, " 开始 ", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION, FontClass.boldFont20, ColorClass.color_18a5d6));
         this.addComponents();

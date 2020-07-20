@@ -37,7 +37,7 @@ public class ImageDir {//单例
         imageDirText.setFont(FontClass.font16);
         imageDirText.setToolTipText("请选择文件夹");//悬停提示信息
 //        imageDirText.setBounds(BaseConstant.CONST120, BaseConstant.CONST80, BaseConstant.CONST500, BaseConstant.CONST40);
-        imageDirText.setBounds(ScreenSize.widthRatio(0.0625), ScreenSize.heightRatio(0.0670), ScreenSize.widthRatio(0.2604), ScreenSize.heightRatio(0.0370));
+        imageDirText.setBounds(ScreenSize.widthRatio(0.0625), ScreenSize.heightRatio(0.0670), ScreenSize.widthRatio(0.2704), ScreenSize.heightRatio(0.0370));
         //imageDirSelectButton
         imageDirSelectButton = new JButton("点击选择");
         imageDirSelectButton.setFont(FontClass.font16);

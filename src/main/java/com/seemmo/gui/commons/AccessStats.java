@@ -2,6 +2,7 @@ package com.seemmo.gui.commons;
 
 import com.seemmo.constants.BaseConstant;
 import com.seemmo.gui.utils.FontClass;
+import com.seemmo.utils.ScreenSize;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,14 +23,16 @@ public class AccessStats {
         //accessSuccessNumLabel
         accessSuccessNumLabel = new JLabel("接入成功: ");
         accessSuccessNumLabel.setFont(FontClass.font16);
-        accessSuccessNumLabel.setBounds(BaseConstant.CONST400, BaseConstant.CONST100, BaseConstant.CONST100, BaseConstant.CONST30);
+//        accessSuccessNumLabel.setBounds(BaseConstant.CONST400, BaseConstant.CONST100, BaseConstant.CONST100, BaseConstant.CONST30);
+        accessSuccessNumLabel.setBounds(ScreenSize.widthRatio(0.2140), ScreenSize.heightRatio(0.080), ScreenSize.widthRatio(0.0421), ScreenSize.heightRatio(0.0278));
         accessSuccessNumLabel.setBackground(Color.ORANGE);
         //accessSuccessNumText
         accessSuccessNumText = new JTextField("0");
         accessSuccessNumText.setEditable(false);//不可编辑
         accessSuccessNumText.setBorder(null);
         accessSuccessNumText.setFont(FontClass.font16);
-        accessSuccessNumText.setBounds(BaseConstant.CONST480, BaseConstant.CONST100, BaseConstant.CONST100, BaseConstant.CONST30);
+//        accessSuccessNumText.setBounds(BaseConstant.CONST480, BaseConstant.CONST100, BaseConstant.CONST100, BaseConstant.CONST30);
+        accessSuccessNumText.setBounds(ScreenSize.widthRatio(0.2561), ScreenSize.heightRatio(0.080), ScreenSize.widthRatio(0.0621), ScreenSize.heightRatio(0.0278));
         accessSuccessNumText.setBackground(Color.WHITE);
 //        accessNumText.addActionListener();
         //accessCompleteNumText(暂时不在页面展示)

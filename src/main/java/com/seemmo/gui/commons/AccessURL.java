@@ -29,7 +29,7 @@ public class AccessURL {//单例
 //        accessUrlText.setText("https://10.10.4.39/client/instesv/illegallogic");
         accessUrlText.setToolTipText("请输入推送地址");//悬停提示信息
 //        accessUrlText.setBounds(BaseConstant.CONST120, BaseConstant.CONST20, BaseConstant.CONST500, BaseConstant.CONST40);
-        accessUrlText.setBounds(ScreenSize.widthRatio(0.0625), ScreenSize.heightRatio(0.0200), ScreenSize.widthRatio(0.2604), ScreenSize.heightRatio(0.0370));
+        accessUrlText.setBounds(ScreenSize.widthRatio(0.0625), ScreenSize.heightRatio(0.0200), ScreenSize.widthRatio(0.2704), ScreenSize.heightRatio(0.0370));
     }//私有化构造方法使得该类无法在外部通过new 进行实例化
     public static AccessURL instance;//准备一个类属性，指向一个实例化对象。 因为是类属性，所以只有一个
     //public static 方法，提供给调用者,创建一次

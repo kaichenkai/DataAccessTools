@@ -8,6 +8,7 @@ import com.seemmo.gui.utils.FontClass;
 import com.seemmo.service.AIQualityTestService;
 import com.seemmo.service.AITrafficTestService;
 import com.seemmo.startup.BootStrap;
+import com.seemmo.utils.ScreenSize;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +35,8 @@ public class AccessTestButton extends JButton {
         this.setText("接入测试");
         this.setFont(FontClass.boldFont16);
         this.setForeground(Color.WHITE);
-        this.setBounds(BaseConstant.CONST120, BaseConstant.CONST110, BaseConstant.CONST100, BaseConstant.CONST50);
+//        this.setBounds(BaseConstant.CONST120, BaseConstant.CONST110, BaseConstant.CONST100, BaseConstant.CONST50);
+        this.setBounds(ScreenSize.widthRatio(0.0625), ScreenSize.heightRatio(0.075), ScreenSize.widthRatio(0.0521), ScreenSize.heightRatio(0.0460));
         this.setBorderPainted(false);//边框
         this.setFocusPainted(false);//去掉按钮文字周围的焦点框
         this.setBackground(ColorClass.color_18a5d6);

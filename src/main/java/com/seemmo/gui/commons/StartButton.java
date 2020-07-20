@@ -10,6 +10,7 @@ import com.seemmo.gui.utils.FontClass;
 import com.seemmo.service.AIQualityService;
 import com.seemmo.service.AITrafficService;
 import com.seemmo.startup.BootStrap;
+import com.seemmo.utils.ScreenSize;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,7 +33,8 @@ public class StartButton extends JButton {
         this.setFont(FontClass.boldFont16);
         this.setForeground(Color.WHITE);
         this.setBackground(ColorClass.color_ffd11a);
-        this.setBounds(BaseConstant.CONST660, BaseConstant.CONST110, BaseConstant.CONST100, BaseConstant.CONST50);
+//        this.setBounds(BaseConstant.CONST660, BaseConstant.CONST110, BaseConstant.CONST100, BaseConstant.CONST50);
+        this.setBounds(ScreenSize.widthRatio(0.3754), ScreenSize.heightRatio(0.075), ScreenSize.widthRatio(0.0521), ScreenSize.heightRatio(0.0460));
         this.setBorderPainted(false);//边框
         this.setFocusPainted(false);//去掉按钮文字周围的焦点框
         this.addActionListener();

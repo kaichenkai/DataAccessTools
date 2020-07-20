@@ -2,6 +2,7 @@ package com.seemmo.gui.commons;
 
 import com.seemmo.constants.BaseConstant;
 import com.seemmo.gui.utils.FontClass;
+import com.seemmo.utils.ScreenSize;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,14 +20,16 @@ public class AccessProgress {
         //accessProgressLabel
         accessProgressLabel = new JLabel("接入进度: ");
         accessProgressLabel.setFont(FontClass.font16);
-        accessProgressLabel.setBounds(BaseConstant.CONST400, BaseConstant.CONST140, BaseConstant.CONST100, BaseConstant.CONST30);
+//        accessProgressLabel.setBounds(BaseConstant.CONST400, BaseConstant.CONST140, BaseConstant.CONST100, BaseConstant.CONST30);
+        accessProgressLabel.setBounds(ScreenSize.widthRatio(0.2140), ScreenSize.heightRatio(0.110), ScreenSize.widthRatio(0.0421), ScreenSize.heightRatio(0.0278));
         accessProgressLabel.setBackground(Color.ORANGE);
         //accessProgressText
         accessProgressText = new JTextField("0.00%");
         accessProgressText.setEditable(false);//只读
         accessProgressText.setBorder(null);
         accessProgressText.setFont(FontClass.font16);
-        accessProgressText.setBounds(BaseConstant.CONST480, BaseConstant.CONST140, BaseConstant.CONST100, BaseConstant.CONST30);
+//        accessProgressText.setBounds(BaseConstant.CONST480, BaseConstant.CONST140, BaseConstant.CONST100, BaseConstant.CONST30);
+        accessProgressText.setBounds(ScreenSize.widthRatio(0.2561), ScreenSize.heightRatio(0.110), ScreenSize.widthRatio(0.0621), ScreenSize.heightRatio(0.0278));
         accessProgressText.setBackground(Color.WHITE);
     }//私有化构造方法使得该类无法在外部通过new 进行实例化
     public static AccessProgress instance;//准备一个类属性，指向一个实例化对象。 因为是类属性，所以只有一个
