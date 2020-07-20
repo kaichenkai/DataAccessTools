@@ -229,6 +229,20 @@ public abstract class BaseService implements IBaseService{
     }
 
     /**
+     * 获取文件的后缀名
+     */
+    public String getFileSuffix(File imgFile){
+        String filename = imgFile.getName();
+        if (filename.length() > 0) {
+            int dot = filename.lastIndexOf('.');
+            if ((dot >-1) && (dot < (filename.length()))) {
+                return filename.substring(dot);
+            }
+        }
+        return "";
+    }
+
+    /**
      * 获取分隔符
      * @return
      */

@@ -106,6 +106,7 @@ public class AITrafficService extends BaseService{
         Map<String, Object> argsMap = new HashMap<>();
         //获取对应规则
         String[] elements = this.getFileNameNoEx(imgFileObj).split(this.separator);
+        String suffix = this.getFileSuffix(imgFileObj);
         //厂商编码
         String manufacturerCode = Manufacturer.instance.getUseValue(elements);
         if (manufacturerCode == null) {
@@ -284,10 +285,9 @@ public class AITrafficService extends BaseService{
             argsMap.put(BusinessConstant.CAR_IMG_ONE_DATA, carImg1Data);
 
             //序列图2
-            elements = imgFileObj.getName().split(this.separator);//获取带后缀名的文件名
             elements[serialIndex] = imageSerialMart2;
             //拼接图片名
-            String imgName2 = String.join(separator, elements);
+            String imgName2 = String.join(separator, elements) + suffix;
             File imgFileObj2 = new File(this.imageDirObj.getAbsolutePath() + File.separator + imgName2);
             fileByte = Files.readAllBytes(imgFileObj2.toPath());
             // base64 加密
@@ -298,7 +298,7 @@ public class AITrafficService extends BaseService{
             if (fixSerialMartStatus3 && !"".equals(imageSerialMart3)) {
                 elements[serialIndex] = imageSerialMart3;
                 //拼接图片名
-                String imgName3 = String.join(separator, elements);
+                String imgName3 = String.join(separator, elements) + suffix;
                 File imgFileObj3 = new File(this.imageDirObj.getAbsolutePath() + File.separator + imgName3);
                 fileByte = Files.readAllBytes(imgFileObj3.toPath());
                 // base64 加密
