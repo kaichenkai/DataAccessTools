@@ -38,6 +38,7 @@ public class CombinedPicRule {//单例
         combinedPicTypeText.addItem("1x4");
         combinedPicTypeText.addItem("2x1");
         combinedPicTypeText.addItem("2x2");
+        combinedPicTypeText.addItem("2x3");
         combinedPicTypeText.addItem("3x1");
         combinedPicTypeText.addItem("4x1");
         combinedPicTypeText.setFont(FontClass.font14);

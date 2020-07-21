@@ -56,7 +56,7 @@ public class AIQualityTestService extends BaseService {
         Map<String, Object> argsMap = new HashMap<>();
 //        argsMap.put(BusinessConstant.BATCH_FLAG, batchFlag);
 //        argsMap.put(BusinessConstant.INSTESV_STATUS, instesvStatus);
-        String[] elements = this.getFileNameNoEx(imgFileObj).split(this.separator);
+        String[] elements = this.getFileNameNoEx(imgFileObj).split(this.separator, -1);
         String suffix = this.getFileSuffix(imgFileObj);
         //厂商编码
         String manufacturerCode = Manufacturer.instance.getUseValue(elements);

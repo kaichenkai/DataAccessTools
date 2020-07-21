@@ -175,7 +175,7 @@ public abstract class BaseService implements IBaseService{
 //            boolean fixSerialMartStatus2 = sequenceImageMode.fixSerialText2;
 //            boolean fixSerialMartStatus3 = sequenceImageMode.fixSerialText3;
                 String imgName = this.getFileNameNoEx(imgFileObj);//获取不带扩展名的图片名
-                String[] elements = imgName.split(this.separator);
+                String[] elements = imgName.split(this.separator, -1);
                 String serialMark;
                 try {
                     serialMark = elements[serialIndex];

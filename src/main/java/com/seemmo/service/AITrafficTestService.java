@@ -55,7 +55,7 @@ public class AITrafficTestService extends BaseService{
     public Map<String, Object> dataMapping(File imgFileObj) throws Exception {
         Map<String, Object> argsMap = new HashMap<>();
         //
-        String[] elements = this.getFileNameNoEx(imgFileObj).split(this.separator);
+        String[] elements = this.getFileNameNoEx(imgFileObj).split(this.separator, -1);
         String suffix = this.getFileSuffix(imgFileObj);
         //厂商编码
         String manufacturerCode = Manufacturer.instance.getUseValue(elements);

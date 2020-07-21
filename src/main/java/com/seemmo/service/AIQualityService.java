@@ -119,7 +119,7 @@ public class AIQualityService extends BaseService {
         argsMap.put(BusinessConstant.BATCH_FLAG, batchFlag);
         argsMap.put(BusinessConstant.INSTESV_STATUS, instesvStatus);
         //获取对应规则
-        String[] elements = this.getFileNameNoEx(imgFileObj).split(this.separator);
+        String[] elements = this.getFileNameNoEx(imgFileObj).split(this.separator, -1);
         String suffix = this.getFileSuffix(imgFileObj);
         //厂商编码
         String manufacturerCode = Manufacturer.instance.getUseValue(elements);
