@@ -19,19 +19,19 @@ public class IllegalTime extends BaseField {
         //illegalTimeLabel
         label = new JLabel("违法时间");
         label.setFont(FontClass.font14);
-        label.setBounds(BaseConstant.CONST20, BaseConstant.CONST480, BaseConstant.CONST100, BaseConstant.CONST30);
+        label.setBounds(BaseConstant.CONST20, BaseConstant.CONST280, BaseConstant.CONST100, BaseConstant.CONST30);
         //illegalTimeIndex
         index = new JTextField();
         index.addKeyListener(new IndexInputControl());//对用户输入的 index的值进行约束
         index.setDocument(new ContentLengthControl(BaseConstant.CONST2));//限制用户输入长度
         index.setFont(FontClass.font14);
-        index.setBounds(BaseConstant.CONST140, BaseConstant.CONST480, BaseConstant.CONST120, BaseConstant.CONST30);
+        index.setBounds(BaseConstant.CONST140, BaseConstant.CONST280, BaseConstant.CONST120, BaseConstant.CONST30);
         //illegalTimeDefaultValue
         checkBoxValue = new JCheckBox("当前时间", false);
         checkBoxValue.setFont(FontClass.font14);
         //defaultValue.setBackground(Color.WHITE);
         checkBoxValue.setFocusable(false);//去掉按钮文字周围的焦点框
-        checkBoxValue.setBounds(BaseConstant.CONST300, BaseConstant.CONST480, BaseConstant.CONST90, BaseConstant.CONST30);
+        checkBoxValue.setBounds(BaseConstant.CONST300, BaseConstant.CONST280, BaseConstant.CONST90, BaseConstant.CONST30);
         checkBoxValue.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

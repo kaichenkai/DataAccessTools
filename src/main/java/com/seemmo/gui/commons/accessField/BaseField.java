@@ -16,6 +16,7 @@ public abstract class BaseField implements BaseFieldInterface{
     public JTextField index;
     public JTextField defaultValue;
     public JCheckBox checkBoxValue;
+    public JComboBox<String> comboBoxValue;
 
     @Override
     public int getIndex() {

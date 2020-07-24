@@ -117,82 +117,16 @@ public class AIQualityTestService extends BaseService {
         argsMap.put(BusinessConstant.CAR_PLATE_NUMBER, carPlateNumber);
         logging.debug("车牌号码" + "\t\t" + carPlateNumber);
 
-        //车牌类型代码
-        String carPlateType = CarPlateType.instance.getUseValue(elements);
-        if (carPlateType == null) {
-            logging.error("请设置字段匹配规则：车牌类型代码");
-            return null;
-        }
-        if (carPlateType.length() > BaseConstant.CONST10) {
-            logging.error("车牌类型代码内容超出限制(10)");
-            return null;
-        }
-        argsMap.put(BusinessConstant.CAR_PLATE_TYPE, carPlateType);
-        logging.debug("车牌类型代码" + "\t" + carPlateType);
-
-        //车牌颜色代码
-        String plateColorCode = PlateColorCode.instance.getUseValue(elements);
-        if (plateColorCode == null) {
-            logging.error("请设置字段匹配规则：车牌颜色代码");
-            return null;
-        }
-        if (plateColorCode.length() > BaseConstant.CONST10) {
-            logging.error("车牌颜色代码内容超出限制(10)");
-            return null;
-        }
-        argsMap.put(BusinessConstant.PLATE_COLOR_CODE, plateColorCode);
-        logging.debug("车牌颜色代码" + "\t" + plateColorCode);
-
-        //车辆颜色代码
-        String carColorCode = CarColorCode.instance.getUseValue(elements);
-        if (carColorCode == null) {
-            logging.error("请设置字段匹配规则：车辆颜色代码");
-            return null;
-        }
-        if (carColorCode.length() > BaseConstant.CONST10) {
-            logging.error("车辆颜色代码内容超出限制(10)");
-            return null;
-        }
-        argsMap.put(BusinessConstant.CAR_COLOR_CODE, carColorCode);
-        logging.debug("车辆颜色代码" + "\t" + carColorCode);
-
-        //行车方向代码
-        String carDirect = CarDirect.instance.getUseValue(elements);
-        if (carDirect == null) {
-            logging.error("请设置字段匹配规则：行车方向代码");
-            return null;
-        }
-        if (carDirect.length() > BaseConstant.CONST10) {
-            logging.error("行车方向代码内容超出限制(10)");
-            return null;
-        }
-        argsMap.put(BusinessConstant.CAR_DIRECT, carDirect);
-        logging.debug("行车方向代码" + "\t" + carDirect);
-
-        //车道号
-        String carWayCodeStr = CarWayCode.instance.getUseValue(elements);
-        if (carWayCodeStr == null) {
-            logging.error("请设置字段匹配规则：车道号");
-            return null;
-        }
-        if (carWayCodeStr.length() > BaseConstant.CONST9) {
-            logging.error("车道号内容超出限制(9)");
-            return null;
-        }
-        int carWayCode = Integer.parseInt(carWayCodeStr);
-        argsMap.put(BusinessConstant.CAR_WAY_CODE, carWayCode);
-        logging.debug("车道号" + "\t\t" + carWayCode);
-
         //违法类型代码
-        String illegalCode = IllegalCode.instance.getUseValue(elements);
+        String illegalCode = IllegalCode.instance.getSelectValue();
         if (illegalCode == null) {
             logging.error("请设置字段匹配规则：违法类型代码");
             return null;
         }
-        if (illegalCode.length() > BaseConstant.CONST10) {
-            logging.error("违法类型代码内容超出限制(10)");
-            return null;
-        }
+//        if (illegalCode.length() > BaseConstant.CONST10) {
+//            logging.error("违法类型代码内容超出限制(10)");
+//            return null;
+//        }
         argsMap.put(BusinessConstant.ILLEGAL_CODE, illegalCode);
         logging.debug("违法类型代码" + "\t" + illegalCode);
 
@@ -220,6 +154,72 @@ public class AIQualityTestService extends BaseService {
         argsMap.put(BusinessConstant.ILLEGAL_TIME, illegalTime);
         logging.debug("违法时间" + "\t\t" + illegalTime);
 
+        //行车方向代码
+        String carDirect = CarDirect.instance.getUseValue(elements);
+        if (carDirect == null) {
+            logging.error("请设置字段匹配规则：行车方向代码");
+            return null;
+        }
+        if (carDirect.length() > BaseConstant.CONST10) {
+            logging.error("行车方向代码内容超出限制(10)");
+            return null;
+        }
+        argsMap.put(BusinessConstant.CAR_DIRECT, carDirect);
+        logging.debug("行车方向代码" + "\t" + carDirect + " (默认值)");
+
+        //车道号
+//        String carWayCodeStr = CarWayCode.instance.getUseValue(elements);
+//        if (carWayCodeStr == null) {
+//            logging.error("请设置字段匹配规则：车道号");
+//            return null;
+//        }
+//        if (carWayCodeStr.length() > BaseConstant.CONST9) {
+//            logging.error("车道号内容超出限制(9)");
+//            return null;
+//        }
+//        int carWayCode = Integer.parseInt(carWayCodeStr);
+//        argsMap.put(BusinessConstant.CAR_WAY_CODE, carWayCode);
+//        logging.debug("车道号" + "\t\t" + carWayCode);
+
+        //车牌类型代码
+//        String carPlateType = CarPlateType.instance.getUseValue(elements);
+//        if (carPlateType == null) {
+//            logging.error("请设置字段匹配规则：车牌类型代码");
+//            return null;
+//        }
+//        if (carPlateType.length() > BaseConstant.CONST10) {
+//            logging.error("车牌类型代码内容超出限制(10)");
+//            return null;
+//        }
+//        argsMap.put(BusinessConstant.CAR_PLATE_TYPE, carPlateType);
+//        logging.debug("车牌类型代码" + "\t" + carPlateType);
+
+        //车牌颜色代码
+//        String plateColorCode = PlateColorCode.instance.getUseValue(elements);
+//        if (plateColorCode == null) {
+//            logging.error("请设置字段匹配规则：车牌颜色代码");
+//            return null;
+//        }
+//        if (plateColorCode.length() > BaseConstant.CONST10) {
+//            logging.error("车牌颜色代码内容超出限制(10)");
+//            return null;
+//        }
+//        argsMap.put(BusinessConstant.PLATE_COLOR_CODE, plateColorCode);
+//        logging.debug("车牌颜色代码" + "\t" + plateColorCode);
+
+        //车辆颜色代码
+//        String carColorCode = CarColorCode.instance.getUseValue(elements);
+//        if (carColorCode == null) {
+//            logging.error("请设置字段匹配规则：车辆颜色代码");
+//            return null;
+//        }
+//        if (carColorCode.length() > BaseConstant.CONST10) {
+//            logging.error("车辆颜色代码内容超出限制(10)");
+//            return null;
+//        }
+//        argsMap.put(BusinessConstant.CAR_COLOR_CODE, carColorCode);
+//        logging.debug("车辆颜色代码" + "\t" + carColorCode);
+
         //图片数据
         //1.合成图
         if (imageDataMode.compositeModeText.isSelected()) {
@@ -230,7 +230,7 @@ public class AIQualityTestService extends BaseService {
                 logging.debug("合成图类型" + "\t\t" + combinedPicType);
             }
             //1.2 车牌图索引值
-            String carNumPicIndex = CombinedPicRule.instance.carNumPicIndex.getText().toString();
+            String carNumPicIndex = CombinedPicRule.instance.carNumPicIndex.getSelectedItem().toString();
             if (!"".equals(carNumPicIndex)) {
                 argsMap.put(BusinessConstant.CAR_NUM_IMAGE_INDEX, Integer.valueOf(carNumPicIndex));
                 logging.debug("车牌图索引" + "\t\t" + carNumPicIndex);

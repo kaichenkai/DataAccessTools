@@ -17,8 +17,8 @@ public class test {
 //        String accessProgress = String.format("%.2f%%", (float)98 / (float)106 * 100);
 //        System.out.println(accessProgress);
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");//毫秒
-        Date dateTime = simpleDateFormat.parse("20200427110321158");
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");//毫秒
+//        Date dateTime = simpleDateFormat.parse("20200427110321158");
 //        Date dateTime = simpleDateFormat.parse("20200427110321");
     }
 }

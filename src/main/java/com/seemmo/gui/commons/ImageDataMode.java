@@ -2,6 +2,7 @@ package com.seemmo.gui.commons;
 
 import com.seemmo.constants.BaseConstant;
 import com.seemmo.constants.BusinessConstant;
+import com.seemmo.gui.commons.accessField.DeviceCode;
 import com.seemmo.gui.panel.AIQualityConfigPanel;
 import com.seemmo.gui.utils.FontClass;
 
@@ -48,6 +49,18 @@ public class ImageDataMode {//单例
                 CombinedPicRule.instance.carNumPicIndex.setVisible(AIQualityConfigPanel.instance.isVisible() && ImageDataMode.instance.compositeModeText.isSelected());
                 CombinedPicRule.instance.recogPicIndexLabel.setVisible(AIQualityConfigPanel.instance.isVisible() && ImageDataMode.instance.compositeModeText.isSelected());
                 CombinedPicRule.instance.recogPicIndex.setVisible(AIQualityConfigPanel.instance.isVisible() && ImageDataMode.instance.compositeModeText.isSelected());
+                //AI智检模式 && 序列图模式 下, 改变设备编码 1x1
+                if (AIQualityConfigPanel.instance.isVisible()){
+                    if (ImageDataMode.instance.compositeModeText.isSelected()) {
+                        //设置设备编码 (设备编码 = 合成图类型 + 车牌索引值)
+                        String combinedPicTypeStr = CombinedPicRule.instance.combinedPicTypeText.getSelectedItem().toString();
+                        String carNumPicIndexStr = CombinedPicRule.instance.carNumPicIndex.getSelectedItem().toString();
+                        String deviceCodeText = combinedPicTypeStr + "_" + carNumPicIndexStr;
+                        DeviceCode.instance.defaultValue.setText(deviceCodeText);
+                    } else {
+                        DeviceCode.instance.defaultValue.setText("1x1");
+                    }
+                }
             }
         });
         //sequenceModeText
@@ -71,19 +84,31 @@ public class ImageDataMode {//单例
                 CombinedPicRule.instance.carNumPicIndex.setVisible(AIQualityConfigPanel.instance.isVisible() && ImageDataMode.instance.compositeModeText.isSelected());
                 CombinedPicRule.instance.recogPicIndexLabel.setVisible(AIQualityConfigPanel.instance.isVisible() && ImageDataMode.instance.compositeModeText.isSelected());
                 CombinedPicRule.instance.recogPicIndex.setVisible(AIQualityConfigPanel.instance.isVisible() && ImageDataMode.instance.compositeModeText.isSelected());
+                //AI智检模式 && 序列图模式 下, 改变设备编码 1x1
+                if (AIQualityConfigPanel.instance.isVisible()){
+                    if (ImageDataMode.instance.compositeModeText.isSelected()) {
+                        //设置设备编码 (设备编码 = 合成图类型 + 车牌索引值)
+                        String combinedPicTypeStr = CombinedPicRule.instance.combinedPicTypeText.getSelectedItem().toString();
+                        String carNumPicIndexStr = CombinedPicRule.instance.carNumPicIndex.getSelectedItem().toString();
+                        String deviceCodeText = combinedPicTypeStr + "_" + carNumPicIndexStr;
+                        DeviceCode.instance.defaultValue.setText(deviceCodeText);
+                    } else {
+                        DeviceCode.instance.defaultValue.setText("1x1");
+                    }
+                }
             }
         });
     }//私有化构造方法使得该类无法在外部通过new 进行实例化
 
-    public static ImageDataMode instance;//准备一个类属性，指向一个实例化对象。 因为是类属性，所以只有一个
+    public static ImageDataMode instance = new ImageDataMode();//准备一个类属性，指向一个实例化对象。 因为是类属性，所以只有一个
 
     //public static 方法，提供给调用者,创建一次
-    public static ImageDataMode createInstance() {
-        if (null == instance) {//第一次访问的时候，发现instance没有指向任何对象，这时实例化一个对象
-            instance = new ImageDataMode();
-        }
-        return instance;
-    }
+//    public static ImageDataMode createInstance() {
+//        if (null == instance) {//第一次访问的时候，发现instance没有指向任何对象，这时实例化一个对象
+//            instance = new ImageDataMode();
+//        }
+//        return instance;
+//    }
 
     /**
      * 获取业务图片模式

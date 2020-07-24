@@ -3,6 +3,7 @@ package com.seemmo.startup;
 import com.seemmo.constants.BaseConstant;
 import com.seemmo.constants.BusinessConstant;
 import com.seemmo.gui.commons.*;
+import com.seemmo.gui.commons.accessField.IllegalCode;
 import com.seemmo.gui.commons.accessField.IllegalTime;
 import com.seemmo.gui.commons.accessField.RecordId;
 import com.seemmo.gui.frame.MainFrame;
@@ -31,7 +32,7 @@ public class BootStrap {
 
     public static void main(String[] args) {
         //主面板
-        JFrame mainJFrame = new MainFrame("数据接入工具(3.0)", ScreenSize.getWidth(), ScreenSize.getWidth());
+        MainFrame mainJFrame = new MainFrame("数据接入工具(3.0)", ScreenSize.getWidth(), ScreenSize.getWidth());
 
         //工具栏(导航菜单)
         //JToolBar toolBar = new MainMenu(ScreenSize.getWidth() / 2, BaseConstant.CONST50);
@@ -53,6 +54,7 @@ public class BootStrap {
         AITrafficConfigPanel aiTrafficConfigPanel = AITrafficConfigPanel.instance;//单例(不允许在外面调用构造方法)
         aiTrafficConfigPanel.setPreferredSize(configPanel.getSize());//setPreferredSize 全尺寸
         aiTrafficConfigPanel.setBackground(Color.WHITE);
+        //在加载配置文件失败时, 默认显示预审界面
         aiTrafficConfigPanel.addComponents();//AI预审接入配置面板添加组件(标签组件只能被添加到一个面板中)
 
         //AI智检接入配置面板
@@ -70,6 +72,9 @@ public class BootStrap {
         SplitPanel splitPanel = SplitPanel.createInstance();
         splitPanel.setLeftComponent(configPanel);//设置左边的配置面板
         splitPanel.setRightComponent(logScrollPanel);//设置右边的日志面板
+
+        //加载配置文件
+        mainJFrame.loadConfigInfo();
 
         //设置windows界面, 下拉框, 复选框样式
         setWindowStyle();
@@ -110,9 +115,11 @@ public class BootStrap {
             SwingUtilities.updateComponentTreeUI(ProcessNum.instance.processNumText);//进程数量
             SwingUtilities.updateComponentTreeUI(ImageDataMode.instance.compositeModeText);//合成图
             SwingUtilities.updateComponentTreeUI(CombinedPicRule.instance.combinedPicTypeText);//合成图类型
+            SwingUtilities.updateComponentTreeUI(CombinedPicRule.instance.carNumPicIndex);//车牌图索引
             SwingUtilities.updateComponentTreeUI(ImageDataMode.instance.sequenceModeText);//序列图
             SwingUtilities.updateComponentTreeUI(RecordId.instance.checkBoxValue);//RecordId
             SwingUtilities.updateComponentTreeUI(IllegalTime.instance.checkBoxValue);//违法时间
+            SwingUtilities.updateComponentTreeUI(IllegalCode.instance.comboBoxValue);//违法类型编码
         } catch (Exception ex) {
             ex.printStackTrace();
         }

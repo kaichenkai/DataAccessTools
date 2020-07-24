@@ -1,8 +1,9 @@
 package com.seemmo.gui.panel;
 
-import com.seemmo.constants.BaseConstant;
 import com.seemmo.gui.commons.AccessURL;
 import com.seemmo.gui.commons.ImageDir;
+import com.seemmo.gui.commons.ProcessNum;
+import com.seemmo.gui.commons.TimeFormat;
 import com.seemmo.utils.ScreenSize;
 
 import javax.swing.*;
@@ -32,22 +33,28 @@ public class AITrafficConfigPanel extends JPanel{
      */
     public void addComponents(){
         //推送地址
-        AccessURL accessURL = AccessURL.createInstance();
+        AccessURL accessURL = AccessURL.instance;
         this.add(accessURL.accessUrlLabel);
         this.add(accessURL.accessUrlText);
 
         //数据文件夹
-        ImageDir imageDir = ImageDir.createInstance();
+        ImageDir imageDir = ImageDir.instance;
         this.add(imageDir.imageDirLabel);
         this.add(imageDir.imageDirText);
         this.add(imageDir.imageDirSelectButton);
 
         //字段匹配面板
-        this.add(FieldPanel.instance);
-        FieldPanel.instance.addComponents();//添加子标签组件
+        this.add(AITrafficFieldPanel.instance);
+        AITrafficFieldPanel.instance.addComponents();//添加子标签组件
 
         //辅助配置面板
         this.add(AssistConfigPanel.instance);
+        //显示时间格式 和 线程数量
+        TimeFormat.instance.timeFormatLabel.setVisible(true);
+        TimeFormat.instance.timeFormatText.setVisible(true);
+        TimeFormat.instance.timeFormatCustomText.setVisible(true);
+        ProcessNum.instance.processNumLabel.setVisible(true);
+        ProcessNum.instance.processNumText.setVisible(true);
 
         //接入进度展示面板
         this.add(ProgressDisplayPanel.instance);

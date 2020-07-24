@@ -1,7 +1,9 @@
 package com.seemmo.constants;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author kaichenkai
@@ -80,6 +82,22 @@ public interface BusinessConstant {
      * 未知的图片数据模式
      */
     String UNKNOWN_IMAGE_MODEL = "未知的图片数据模式, 请联系管理员!";
+
+    /**
+     * 厂商代码, 行车方向 默认值
+     */
+    String DEFAULT_MANUFACTURER_CODE = "SEEMMO";
+    String DEFAULT_CAR_DIRECT = "9";
+
+    /**
+     * 请选择违法
+     */
+    String PLEASE_SELECT = "请选择";
+
+    /**
+     * 配置文件名称
+     */
+    String CONFIG_FILE_NAME = "configInfo.txt";
 
     /**
      * 字段名

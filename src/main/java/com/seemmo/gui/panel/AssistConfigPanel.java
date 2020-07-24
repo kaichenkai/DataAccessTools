@@ -39,13 +39,13 @@ public class AssistConfigPanel extends JPanel {
 
     public void addComponents(){
         //图片数据模式
-        ImageDataMode imageDataMode = ImageDataMode.createInstance();
+        ImageDataMode imageDataMode = ImageDataMode.instance;
         this.add(imageDataMode.imageDataModeLabel);
         this.add(imageDataMode.compositeModeText);
         this.add(imageDataMode.sequenceModeText);
 
         //合成图规则(AI智检独有)
-        CombinedPicRule combinedPicRule = CombinedPicRule.createInstance();
+        CombinedPicRule combinedPicRule = CombinedPicRule.instance;
         this.add(combinedPicRule.combinedPicRuleLabel);
         this.add(combinedPicRule.combinedPicTypeText);
         this.add(combinedPicRule.carNumPicIndexLabel);

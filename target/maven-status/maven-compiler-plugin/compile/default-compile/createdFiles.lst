@@ -51,7 +51,6 @@ com\seemmo\gui\panel\logPanel\LogPanel.class
 com\seemmo\gui\commons\CombinedPicRule.class
 com\seemmo\gui\commons\AccessTestButton$1.class
 com\seemmo\service\AIQualityTestService.class
-com\seemmo\gui\panel\FieldPanel.class
 com\seemmo\gui\commons\StartButton.class
 com\seemmo\gui\utils\ColorClass.class
 com\seemmo\gui\commons\accessField\CarColorCode.class

@@ -78,12 +78,12 @@ public class ImageDir {//单例
         });
     }
 
-    public static ImageDir instance;//准备一个类属性，指向一个实例化对象。 因为是类属性，所以只有一个
+    public static ImageDir instance = new ImageDir();//准备一个类属性，指向一个实例化对象。 因为是类属性，所以只有一个
     //public static 方法，提供给调用者,创建一次
-    public static ImageDir createInstance(){
-        if(null==instance){//第一次访问的时候，发现instance没有指向任何对象，这时实例化一个对象
-            instance = new ImageDir();
-        }
-        return instance;
-    }
+//    public static ImageDir createInstance(){
+//        if(null==instance){//第一次访问的时候，发现instance没有指向任何对象，这时实例化一个对象
+//            instance = new ImageDir();
+//        }
+//        return instance;
+//    }
 }
