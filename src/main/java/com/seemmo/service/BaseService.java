@@ -10,6 +10,8 @@ import java.io.File;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author: kaichenkai
@@ -39,10 +41,13 @@ public abstract class BaseService implements IBaseService{
     public String accessUrl;
 
     //统计数据
-    public Integer accessTotal = AccessTotal.instance.getAccessTotal();//总量
-    public Integer accessCompleteNum = AccessStats.instance.getAccessCompleteNum();//已完成数量
-    public Integer accessSuccessNum = AccessStats.instance.getAccessSuccessNum();//接入成功数量
-    public String accessProgress = AccessProgress.instance.getAccessProgress();//接入进度
+    public Integer accessTotal;//总量
+    public Integer accessCompleteNum;//已完成数量
+    public Integer accessSuccessNum;//接入成功数量
+    public String accessProgress;//接入进度
+
+    //Lock 锁 (避免多线程抢占资源)
+    public Lock threadLock = new ReentrantLock();
 
     //接口业务抽象方法, 由业务实现类覆写
     public abstract boolean run() throws InterruptedException;
@@ -51,14 +56,19 @@ public abstract class BaseService implements IBaseService{
      * 接入前置方法
      */
     public boolean initializationCheck(){
-        //1 清理日志区内容
+        //清理日志区内容
         logging.setText("");
-        //2 接入计数置零
+        //面板统计置零
+        AccessTotal.instance.setAccessTotal(0);
+        AccessStats.instance.setAccessCompleteNum(0);
+        AccessStats.instance.setAccessSuccessNum(0);
+        AccessProgress.instance.setAccessProgress("0%");
+        //接入计数置零
         this.accessTotal = 0;
         this.accessCompleteNum = 0;
         this.accessSuccessNum = 0;
         this.accessProgress = "0%";
-        //3 初始化属性
+        //初始化属性
         this.imageDirObj = new File(ImageDir.instance.imageDirText.getText().trim());
         this.imageObjList = new ArrayList<>();
         this.separator = getSeparator();

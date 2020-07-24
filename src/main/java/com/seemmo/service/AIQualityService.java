@@ -363,8 +363,11 @@ public class AIQualityService extends BaseService {
                     // 推送结果输出到日志区
                     if ("0".equals(errorCode)) {
                         logging.info(String.format("success: %s", imgFileObj.getName()));
+                        //加线程锁
+                        threadLock.lock();
                         accessSuccessNum += 1;
                         AccessStats.instance.setAccessSuccessNum(accessSuccessNum);
+                        threadLock.unlock();
                     } else if ("308".equals(errorCode)) {
                         // 重复接入
                         logging.error(String.format("repeated: %s", imgFileObj.getName()));
@@ -375,14 +378,18 @@ public class AIQualityService extends BaseService {
                 } catch (Exception ex) {
                     logging.error(String.format("请求接口异常: [%s]", ex));
                 } finally {
-                    //更新接入完成数量
+                    //更新接入完成数量 //加线程锁
+                    threadLock.lock();
                     accessCompleteNum += 1;
                     //更新接入进度设置到显示面板上
                     accessProgress = String.format("%.2f%%", (float) accessCompleteNum / (float) accessTotal * 100);
                     AccessProgress.instance.setAccessProgress(accessProgress);
+                    threadLock.unlock();
+                    //
                     if ("100.00%".equals(accessProgress)) {
                         logging.warning("数据接入完成!");
-                        StartButton.instance.enabled(true);
+                        StartButton.instance.enabled(true);//恢复按钮状态
+                        AccessTestButton.instance.enabled(true);//恢复按钮状态
                     }
                     //线程池的任务减1
                     if(countDownLatch.getCount()>0){

@@ -57,61 +57,78 @@ public class AccessTestButton extends JButton {
         this.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                StartButton.instance.enabled(false);//设置为不可点击, 配置页不可切换
+                AccessTestButton.instance.enabled(false);//设置为不可点击, 配置页不可切换
                 //根据业务模式应用不同服务类
-                boolean runStatus;
+                //boolean runStatus;
                 switch (BootStrap.business) {
                     case BusinessConstant.AI_TRAFFIC_USINESS_MODE:
                         AITrafficTestService aiTrafficTestService = AITrafficTestService.instance;
-                        runStatus = aiTrafficTestService.run();
-                        if (!runStatus) {//规则配置有误
-                            if (ImageDataMode.instance.compositeModeText.isSelected()) {
-                                AccessTestButton.aiTrafficCompositeImageModeTest = false;//设置为未测试的状态
-                                logging.error("\nAI预审(合成图模式)接入测试未通过, 请检查配置后, 再次尝试...");
-                            } else if (ImageDataMode.instance.sequenceModeText.isSelected()) {
-                                AccessTestButton.aiTrafficSequenceImageModeTest = false;//设置为未测试的状态
-                                logging.error("\nAI预审(序列图模式)接入测试通过, 请检查配置后, 再次尝试...");
+                        Thread aiTrafficTestThread = new Thread(() -> {
+                            boolean testStatus = aiTrafficTestService.run();
+                            if (!testStatus) {//规则配置有误
+                                if (ImageDataMode.instance.compositeModeText.isSelected()) {
+                                    AccessTestButton.aiTrafficCompositeImageModeTest = false;//设置为未测试的状态
+                                    logging.error("\nAI预审(合成图模式)接入测试未通过, 请检查配置后, 再次尝试...");
+                                } else if (ImageDataMode.instance.sequenceModeText.isSelected()) {
+                                    AccessTestButton.aiTrafficSequenceImageModeTest = false;//设置为未测试的状态
+                                    logging.error("\nAI预审(序列图模式)接入测试通过, 请检查配置后, 再次尝试...");
+                                } else {
+                                    logging.error(BusinessConstant.UNKNOWN_IMAGE_MODEL);
+                                }
                             } else {
-                                logging.error(BusinessConstant.UNKNOWN_IMAGE_MODEL);
+                                if (ImageDataMode.instance.compositeModeText.isSelected()) {
+                                    AccessTestButton.aiTrafficCompositeImageModeTest = true;//设置为已测试的状态
+                                    logging.warning("AI预审(合成图模式)接入测试通过, 请仔细核对字段信息, 然后开始接入!");
+                                } else if (ImageDataMode.instance.sequenceModeText.isSelected()) {
+                                    AccessTestButton.aiTrafficSequenceImageModeTest = true;//设置为已测试的状态
+                                    logging.warning("AI预审(序列图模式)接入测试通过, 请仔细核对字段信息, 然后开始接入!");
+                                } else {
+                                    logging.error(BusinessConstant.UNKNOWN_IMAGE_MODEL);
+                                }
                             }
-                        }else {
-                            if (ImageDataMode.instance.compositeModeText.isSelected()) {
-                                AccessTestButton.aiTrafficCompositeImageModeTest = true;//设置为已测试的状态
-                                logging.warning("AI预审(合成图模式)接入测试通过, 请仔细核对字段信息, 然后开始接入!");
-                            } else if (ImageDataMode.instance.sequenceModeText.isSelected()) {
-                                AccessTestButton.aiTrafficSequenceImageModeTest = true;//设置为已测试的状态
-                                logging.warning("AI预审(序列图模式)接入测试通过, 请仔细核对字段信息, 然后开始接入!");
-                            } else {
-                                logging.error(BusinessConstant.UNKNOWN_IMAGE_MODEL);
-                            }
-                        }
+                            //恢复按钮状态
+                            StartButton.instance.enabled(true);
+                            AccessTestButton.instance.enabled(true);
+                        });
+                        aiTrafficTestThread.start();//避免主线程阻塞造成打印日志延迟问题
                         break;
                     case BusinessConstant.AI_QUALITY_USINESS_MODE:
                         AIQualityTestService aiQualityTestService = AIQualityTestService.instance;
-                        runStatus = aiQualityTestService.run();
-                        if (!runStatus) {//规则配置有误
-                            if (ImageDataMode.instance.compositeModeText.isSelected()) {
-                                AccessTestButton.aiQualityCompositeImageModeTest = false;//设置为未测试的状态
-                                logging.error("\nAI智检(合成图模式)接入测试未通过, 请检查配置后, 再次尝试...");
-                            } else if (ImageDataMode.instance.sequenceModeText.isSelected()) {
-                                AccessTestButton.aiQualitySequenceImageModeTest = false;//设置为未测试的状态
-                                logging.error("\nAI智检(序列图模式)接入测试通过, 请检查配置后, 再次尝试...");
-                            } else {
-                                logging.error(BusinessConstant.UNKNOWN_IMAGE_MODEL);
+                        Thread aiQualityTestThread = new Thread(() -> {
+                            boolean runStatus = aiQualityTestService.run();
+                            if (!runStatus) {//规则配置有误
+                                if (ImageDataMode.instance.compositeModeText.isSelected()) {
+                                    AccessTestButton.aiQualityCompositeImageModeTest = false;//设置为未测试的状态
+                                    logging.error("\nAI智检(合成图模式)接入测试未通过, 请检查配置后, 再次尝试...");
+                                } else if (ImageDataMode.instance.sequenceModeText.isSelected()) {
+                                    AccessTestButton.aiQualitySequenceImageModeTest = false;//设置为未测试的状态
+                                    logging.error("\nAI智检(序列图模式)接入测试通过, 请检查配置后, 再次尝试...");
+                                } else {
+                                    logging.error(BusinessConstant.UNKNOWN_IMAGE_MODEL);
+                                }
+                            }else {
+                                if (ImageDataMode.instance.compositeModeText.isSelected()) {
+                                    AccessTestButton.aiQualityCompositeImageModeTest = true;//设置为已测试的状态
+                                    logging.warning("AI智检(合成图模式)接入测试通过, 请仔细核对字段信息, 然后开始接入!");
+                                } else if (ImageDataMode.instance.sequenceModeText.isSelected()) {
+                                    AccessTestButton.aiQualitySequenceImageModeTest = true;//设置为已测试的状态
+                                    logging.warning("AI智检(序列图模式)接入测试通过, 请仔细核对字段信息, 然后开始接入!");
+                                } else {
+                                    logging.error(BusinessConstant.UNKNOWN_IMAGE_MODEL);
+                                }
                             }
-                        }else {
-                            if (ImageDataMode.instance.compositeModeText.isSelected()) {
-                                AccessTestButton.aiQualityCompositeImageModeTest = true;//设置为已测试的状态
-                                logging.warning("AI智检(合成图模式)接入测试通过, 请仔细核对字段信息, 然后开始接入!");
-                            } else if (ImageDataMode.instance.sequenceModeText.isSelected()) {
-                                AccessTestButton.aiQualitySequenceImageModeTest = true;//设置为已测试的状态
-                                logging.warning("AI智检(序列图模式)接入测试通过, 请仔细核对字段信息, 然后开始接入!");
-                            } else {
-                                logging.error(BusinessConstant.UNKNOWN_IMAGE_MODEL);
-                            }
-                        }
+                            //恢复按钮状态
+                            StartButton.instance.enabled(true);
+                            AccessTestButton.instance.enabled(true);
+                        });
+                        aiQualityTestThread.start();//避免主线程阻塞造成打印日志延迟问题
                         break;
                     default:
                         logging.error(BusinessConstant.BUSINESS_MODE_ERROR);
+                        //恢复按钮状态
+                        StartButton.instance.enabled(true);
+                        AccessTestButton.instance.enabled(true);
                 }
             }
         });

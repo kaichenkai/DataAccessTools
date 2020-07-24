@@ -55,69 +55,109 @@ public class StartButton extends JButton {
             @Override
             public void actionPerformed(ActionEvent e) {
                 StartButton.instance.enabled(false);//设置为不可点击, 配置页不可切换
+                AccessTestButton.instance.enabled(false);//设置为不可点击, 配置页不可切换
+
                 //根据业务模式应用不同服务类
-                boolean runStatus = false;
                 switch (BootStrap.business) {
                     case BusinessConstant.AI_TRAFFIC_USINESS_MODE:
                         //开始接入之前, 需要先进行接入测试(合成图 or 序列图)
-                        if (ImageDataMode.instance.compositeModeText.isSelected()) {
-                            if (AccessTestButton.aiTrafficCompositeImageModeTest) {
-                                AITrafficService aiTrafficService = AITrafficService.instance;
-                                runStatus = aiTrafficService.run();
+                        Thread aiTrafficServiceThread = new Thread(() -> {
+                            if (ImageDataMode.instance.compositeModeText.isSelected()) {
+                                if (AccessTestButton.aiTrafficCompositeImageModeTest) {
+                                    AITrafficService aiTrafficService = AITrafficService.instance;
+                                    boolean runStatus = aiTrafficService.run();
+                                    //规则配置有误
+                                    if (!runStatus) {
+//                                        logging.error("\n请检查配置后, 再次尝试...");
+                                        //恢复开关状态
+                                        StartButton.instance.enabled(true);
+                                        AccessTestButton.instance.enabled(true);
+                                    } else {
+                                        //在接入完成后, 会恢复开关状态(因为主线程不能阻塞)
+                                    }
+                                } else {
+                                    logging.warning("请先进行AI预审(合成图模式)接入测试, 确定字段匹配正确后, 再开始接入!");
+                                }
+                            } else if (ImageDataMode.instance.sequenceModeText.isSelected()) {
+                                if (AccessTestButton.aiTrafficSequenceImageModeTest) {
+                                    AITrafficService aiTrafficService = AITrafficService.instance;
+                                    boolean runStatus = aiTrafficService.run();
+                                    //规则配置有误
+                                    if (!runStatus) {
+//                                        logging.error("\n请检查配置后, 再次尝试...");
+                                        //恢复开关状态
+                                        StartButton.instance.enabled(true);
+                                        AccessTestButton.instance.enabled(true);
+                                    } else {
+                                        //在接入完成后, 会恢复开关状态(因为主线程不能阻塞)
+                                    }
+                                } else {
+                                    logging.warning("请先进行AI预审(序列图模式)接入测试, 确定字段匹配正确后, 再开始接入!");
+                                    //恢复开关状态
+                                    StartButton.instance.enabled(true);
+                                    AccessTestButton.instance.enabled(true);
+                                }
                             } else {
-                                logging.warning("请先进行AI预审(合成图模式)接入测试, 确定字段匹配正确后, 再开始接入!");
-                                StartButton.instance.enabled(true);//恢复开关状态
-                                return;
+                                logging.error(BusinessConstant.UNKNOWN_IMAGE_MODEL);
+                                //恢复开关状态
+                                StartButton.instance.enabled(true);
+                                AccessTestButton.instance.enabled(true);
                             }
-                        } else if (ImageDataMode.instance.sequenceModeText.isSelected()) {
-                            if (AccessTestButton.aiTrafficSequenceImageModeTest) {
-                                AITrafficService aiTrafficService = AITrafficService.instance;
-                                runStatus = aiTrafficService.run();
-                            } else {
-                                logging.warning("请先进行AI预审(序列图模式)接入测试, 确定字段匹配正确后, 再开始接入!");
-                                StartButton.instance.enabled(true);//恢复开关状态
-                                return;
-                            }
-                        } else {
-                            logging.error(BusinessConstant.UNKNOWN_IMAGE_MODEL);
-                            return;
-                        }
+                        });
+                        aiTrafficServiceThread.start();
                         break;
                     case BusinessConstant.AI_QUALITY_USINESS_MODE:
                         //开始接入之前, 需要先进行接入测试(合成图 or 序列图)
                         if (ImageDataMode.instance.compositeModeText.isSelected()) {
                             if (AccessTestButton.aiQualityCompositeImageModeTest) {
                                 AIQualityService aiQualityService = AIQualityService.instance;
-                                runStatus = aiQualityService.run();
+                                boolean runStatus = aiQualityService.run();
+                                //规则配置有误
+                                if (!runStatus) {
+//                                        logging.error("\n请检查配置后, 再次尝试...");
+                                    //恢复开关状态
+                                    StartButton.instance.enabled(true);
+                                    AccessTestButton.instance.enabled(true);
+                                } else {
+                                    //在接入完成后, 会恢复开关状态(因为主线程不能阻塞)
+                                }
                             } else {
                                 logging.warning("请先进行AI智检(合成图模式)接入测试, 确定字段匹配正确后, 再开始接入!");
                                 StartButton.instance.enabled(true);//恢复开关状态
+                                AccessTestButton.instance.enabled(true);//恢复开关状态
                                 return;
                             }
                         } else if (ImageDataMode.instance.sequenceModeText.isSelected()) {
                             if (AccessTestButton.aiQualitySequenceImageModeTest) {
                                 AIQualityService aiQualityService = AIQualityService.instance;
-                                runStatus = aiQualityService.run();
+                                boolean runStatus = aiQualityService.run();
+                                //规则配置有误
+                                if (!runStatus) {
+//                                        logging.error("\n请检查配置后, 再次尝试...");
+                                    //恢复开关状态
+                                    StartButton.instance.enabled(true);
+                                    AccessTestButton.instance.enabled(true);
+                                } else {
+                                    //在接入完成后, 会恢复开关状态(因为主线程不能阻塞)
+                                }
                             } else {
                                 logging.warning("请先进行AI智检(序列图模式)接入测试, 确定字段匹配正确后, 再开始接入!");
                                 StartButton.instance.enabled(true);//恢复开关状态
+                                AccessTestButton.instance.enabled(true);//恢复开关状态
                                 return;
                             }
                         } else {
                             logging.error(BusinessConstant.UNKNOWN_IMAGE_MODEL);
+                            StartButton.instance.enabled(true);//恢复开关状态
+                            AccessTestButton.instance.enabled(true);//恢复开关状态
                             return;
                         }
                         break;
                     default:
                         logging.error(BusinessConstant.BUSINESS_MODE_ERROR);
+                        StartButton.instance.enabled(true);//恢复开关状态
+                        AccessTestButton.instance.enabled(true);//恢复开关状态
                 }
-
-                //规则配置有误
-                if (!runStatus) {
-                    logging.error("\n请检查配置后, 再次尝试...");
-                    StartButton.instance.enabled(true);//恢复开关状态
-                }
-                //在接入完成后, 会恢复开关状态(因为主线程不能阻塞)
             }
         });
 

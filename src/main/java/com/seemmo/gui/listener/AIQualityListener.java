@@ -2,10 +2,7 @@ package com.seemmo.gui.listener;
 
 import com.seemmo.constants.BaseConstant;
 import com.seemmo.constants.BusinessConstant;
-import com.seemmo.gui.commons.AccessURL;
-import com.seemmo.gui.commons.CombinedPicRule;
-import com.seemmo.gui.commons.ImageDataMode;
-import com.seemmo.gui.commons.StartButton;
+import com.seemmo.gui.commons.*;
 import com.seemmo.gui.panel.AIQualityConfigPanel;
 import com.seemmo.gui.panel.AITrafficConfigPanel;
 import com.seemmo.gui.utils.ColorClass;
@@ -55,7 +52,7 @@ public class AIQualityListener extends JButton {
         //按钮点击事件绑定
         this.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (StartButton.instance.isEnabled()) {//程序启动后不允许切换配置页
+                if (StartButton.instance.isEnabled() && AccessTestButton.instance.isEnabled()) {//程序启动后不允许切换配置页
                     AIQualityConfigPanel.instance.setVisible(true);
                     AITrafficConfigPanel.instance.setVisible(false);
                     AIQualityConfigPanel.instance.addComponents();//添加组件

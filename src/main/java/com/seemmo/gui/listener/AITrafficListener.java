@@ -2,10 +2,7 @@ package com.seemmo.gui.listener;
 
 import com.seemmo.constants.BaseConstant;
 import com.seemmo.constants.BusinessConstant;
-import com.seemmo.gui.commons.AccessURL;
-import com.seemmo.gui.commons.CombinedPicRule;
-import com.seemmo.gui.commons.ImageDataMode;
-import com.seemmo.gui.commons.StartButton;
+import com.seemmo.gui.commons.*;
 import com.seemmo.gui.panel.AIQualityConfigPanel;
 import com.seemmo.gui.panel.AITrafficConfigPanel;
 import com.seemmo.gui.utils.ColorClass;
@@ -52,7 +49,7 @@ public class AITrafficListener extends JButton {
         //按钮点击事件绑定
         this.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (StartButton.instance.isEnabled()) {//开始接入按钮打开时允许切换
+                if (StartButton.instance.isEnabled() && AccessTestButton.instance.isEnabled()) {//开始接入按钮打开时允许切换
                     AITrafficConfigPanel.instance.setVisible(true);
                     AIQualityConfigPanel.instance.setVisible(false);
                     AITrafficConfigPanel.instance.addComponents();//添加组件

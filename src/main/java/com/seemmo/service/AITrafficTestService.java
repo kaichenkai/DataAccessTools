@@ -2,6 +2,8 @@ package com.seemmo.service;
 
 import com.seemmo.constants.BaseConstant;
 import com.seemmo.constants.BusinessConstant;
+import com.seemmo.gui.commons.AccessTestButton;
+import com.seemmo.gui.commons.ImageDataMode;
 import com.seemmo.gui.commons.accessField.*;
 import java.io.File;
 import java.nio.file.Files;
@@ -116,6 +118,70 @@ public class AITrafficTestService extends BaseService{
         argsMap.put(BusinessConstant.CAR_PLATE_NUMBER, carPlateNumber);
         logging.debug("车牌号码" + "\t\t" + carPlateNumber);
 
+        //违法类型代码
+        String illegalCode = IllegalCode.instance.getUseValue(elements);
+        if (illegalCode == null) {
+            logging.error("请设置字段匹配规则：违法类型代码");
+            return null;
+        }
+        if (illegalCode.length() > BaseConstant.CONST10) {
+            logging.error("违法类型代码内容超出限制(10)");
+            return null;
+        }
+        argsMap.put(BusinessConstant.ILLEGAL_CODE, illegalCode);
+        logging.debug("违法类型代码" + "\t" + illegalCode);
+
+        //违法时间
+        boolean illegalTimeCheckBoxValue = IllegalTime.instance.getCheckBoxValue();
+        int illegalTimeIndex;
+        String illegalTime;
+        if (illegalTimeCheckBoxValue) {
+            //使用当前时间
+            illegalTime = String.valueOf(new Date().getTime());
+        } else if ((illegalTimeIndex = IllegalTime.instance.getIndex()) >= 0) {
+            //优先使用自定义时间格式
+            String timeFormat = this.getTimeFormat();
+            if (timeFormat == null) {
+                illegalTime = elements[illegalTimeIndex];
+            } else {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(timeFormat);
+                Date dateTime = simpleDateFormat.parse(elements[illegalTimeIndex]);
+                illegalTime = String.valueOf(dateTime.getTime());
+            }
+        } else {
+            logging.error("请设置字段匹配规则：违法时间");
+            return null;
+        }
+        argsMap.put(BusinessConstant.ILLEGAL_TIME, illegalTime);
+        logging.debug("违法时间" + "\t\t" + illegalTime);
+
+        //行车方向代码
+        String carDirect = CarDirect.instance.getUseValue(elements);
+        if (carDirect == null) {
+            logging.error("请设置字段匹配规则：行车方向代码");
+            return null;
+        }
+        if (carDirect.length() > BaseConstant.CONST10) {
+            logging.error("行车方向代码内容超出限制(10)");
+            return null;
+        }
+        argsMap.put(BusinessConstant.CAR_DIRECT, carDirect);
+        logging.debug("行车方向代码" + "\t" + carDirect);
+
+        //车道号
+        String carWayCodeStr = CarWayCode.instance.getUseValue(elements);
+        if (carWayCodeStr == null) {
+            logging.error("请设置字段匹配规则：车道号");
+            return null;
+        }
+        if (carWayCodeStr.length() > BaseConstant.CONST9) {
+            logging.error("车道号内容超出限制(9)");
+            return null;
+        }
+        int carWayCode = Integer.parseInt(carWayCodeStr);
+        argsMap.put(BusinessConstant.CAR_WAY_CODE, carWayCode);
+        logging.debug("车道号" + "\t\t" + carWayCode);
+
         //车牌类型代码
         String carPlateType = CarPlateType.instance.getUseValue(elements);
         if (carPlateType == null) {
@@ -154,70 +220,6 @@ public class AITrafficTestService extends BaseService{
         }
         argsMap.put(BusinessConstant.CAR_COLOR_CODE, carColorCode);
         logging.debug("车辆颜色代码" + "\t" + carColorCode);
-
-        //行车方向代码
-        String carDirect = CarDirect.instance.getUseValue(elements);
-        if (carDirect == null) {
-            logging.error("请设置字段匹配规则：行车方向代码");
-            return null;
-        }
-        if (carDirect.length() > BaseConstant.CONST10) {
-            logging.error("行车方向代码内容超出限制(10)");
-            return null;
-        }
-        argsMap.put(BusinessConstant.CAR_DIRECT, carDirect);
-        logging.debug("行车方向代码" + "\t" + carDirect);
-
-        //车道号
-        String carWayCodeStr = CarWayCode.instance.getUseValue(elements);
-        if (carWayCodeStr == null) {
-            logging.error("请设置字段匹配规则：车道号");
-            return null;
-        }
-        if (carWayCodeStr.length() > BaseConstant.CONST9) {
-            logging.error("车道号内容超出限制(9)");
-            return null;
-        }
-        int carWayCode = Integer.parseInt(carWayCodeStr);
-        argsMap.put(BusinessConstant.CAR_WAY_CODE, carWayCode);
-        logging.debug("车道号" + "\t\t" + carWayCode);
-
-        //违法类型代码
-        String illegalCode = IllegalCode.instance.getUseValue(elements);
-        if (illegalCode == null) {
-            logging.error("请设置字段匹配规则：违法类型代码");
-            return null;
-        }
-        if (illegalCode.length() > BaseConstant.CONST10) {
-            logging.error("违法类型代码内容超出限制(10)");
-            return null;
-        }
-        argsMap.put(BusinessConstant.ILLEGAL_CODE, illegalCode);
-        logging.debug("违法类型代码" + "\t" + illegalCode);
-
-        //违法时间
-        boolean illegalTimeCheckBoxValue = IllegalTime.instance.getCheckBoxValue();
-        int illegalTimeIndex;
-        String illegalTime;
-        if (illegalTimeCheckBoxValue) {
-            //使用当前时间
-            illegalTime = String.valueOf(new Date().getTime());
-        } else if ((illegalTimeIndex = IllegalTime.instance.getIndex()) >= 0) {
-            //优先使用自定义时间格式
-            String timeFormat = this.getTimeFormat();
-            if (timeFormat == null) {
-                illegalTime = elements[illegalTimeIndex];
-            } else {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(timeFormat);
-                Date dateTime = simpleDateFormat.parse(elements[illegalTimeIndex]);
-                illegalTime = String.valueOf(dateTime.getTime());
-            }
-        } else {
-            logging.error("请设置字段匹配规则：违法时间");
-            return null;
-        }
-        argsMap.put(BusinessConstant.ILLEGAL_TIME, illegalTime);
-        logging.debug("违法时间" + "\t\t" + illegalTime);
 
         //图片数据
         //1.合成图

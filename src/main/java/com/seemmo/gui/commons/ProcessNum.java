@@ -27,6 +27,10 @@ public class ProcessNum {
         processNumText.addItem(2);
         processNumText.addItem(3);
         processNumText.addItem(4);
+        processNumText.addItem(5);
+        processNumText.addItem(6);
+        processNumText.addItem(7);
+        processNumText.addItem(8);
         processNumText.setFont(FontClass.font14);
         processNumText.setFocusable(false);//去掉按钮文字周围的焦点框
         processNumText.setBackground(Color.WHITE);
