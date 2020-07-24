@@ -56,7 +56,6 @@ public class StartButton extends JButton {
             public void actionPerformed(ActionEvent e) {
                 StartButton.instance.enabled(false);//设置为不可点击, 配置页不可切换
                 AccessTestButton.instance.enabled(false);//设置为不可点击, 配置页不可切换
-
                 //根据业务模式应用不同服务类
                 switch (BootStrap.business) {
                     case BusinessConstant.AI_TRAFFIC_USINESS_MODE:
@@ -77,6 +76,9 @@ public class StartButton extends JButton {
                                     }
                                 } else {
                                     logging.warning("请先进行AI预审(合成图模式)接入测试, 确定字段匹配正确后, 再开始接入!");
+                                    //恢复开关状态
+                                    StartButton.instance.enabled(true);
+                                    AccessTestButton.instance.enabled(true);
                                 }
                             } else if (ImageDataMode.instance.sequenceModeText.isSelected()) {
                                 if (AccessTestButton.aiTrafficSequenceImageModeTest) {
@@ -125,7 +127,6 @@ public class StartButton extends JButton {
                                 logging.warning("请先进行AI智检(合成图模式)接入测试, 确定字段匹配正确后, 再开始接入!");
                                 StartButton.instance.enabled(true);//恢复开关状态
                                 AccessTestButton.instance.enabled(true);//恢复开关状态
-                                return;
                             }
                         } else if (ImageDataMode.instance.sequenceModeText.isSelected()) {
                             if (AccessTestButton.aiQualitySequenceImageModeTest) {
@@ -144,13 +145,11 @@ public class StartButton extends JButton {
                                 logging.warning("请先进行AI智检(序列图模式)接入测试, 确定字段匹配正确后, 再开始接入!");
                                 StartButton.instance.enabled(true);//恢复开关状态
                                 AccessTestButton.instance.enabled(true);//恢复开关状态
-                                return;
                             }
                         } else {
                             logging.error(BusinessConstant.UNKNOWN_IMAGE_MODEL);
                             StartButton.instance.enabled(true);//恢复开关状态
                             AccessTestButton.instance.enabled(true);//恢复开关状态
-                            return;
                         }
                         break;
                     default:
