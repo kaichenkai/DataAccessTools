@@ -72,7 +72,7 @@ public class AccessTestButton extends JButton {
                                     logging.error("\nAI预审(合成图模式)接入测试未通过, 请检查配置后, 再次尝试...");
                                 } else if (ImageDataMode.instance.sequenceModeText.isSelected()) {
                                     AccessTestButton.aiTrafficSequenceImageModeTest = false;//设置为未测试的状态
-                                    logging.error("\nAI预审(序列图模式)接入测试通过, 请检查配置后, 再次尝试...");
+                                    logging.error("\nAI预审(序列图模式)接入测试未通过, 请检查配置后, 再次尝试...");
                                 } else {
                                     logging.error(BusinessConstant.UNKNOWN_IMAGE_MODEL);
                                 }
@@ -103,7 +103,7 @@ public class AccessTestButton extends JButton {
                                     logging.error("\nAI智检(合成图模式)接入测试未通过, 请检查配置后, 再次尝试...");
                                 } else if (ImageDataMode.instance.sequenceModeText.isSelected()) {
                                     AccessTestButton.aiQualitySequenceImageModeTest = false;//设置为未测试的状态
-                                    logging.error("\nAI智检(序列图模式)接入测试通过, 请检查配置后, 再次尝试...");
+                                    logging.error("\nAI智检(序列图模式)接入测试未通过, 请检查配置后, 再次尝试...");
                                 } else {
                                     logging.error(BusinessConstant.UNKNOWN_IMAGE_MODEL);
                                 }
