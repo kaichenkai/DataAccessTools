@@ -319,12 +319,16 @@ public abstract class BaseService implements IBaseService{
             return false;
         }
         logging.debug(String.format("序列图 1 标识: %s", imageSerialMart1));
+
         //
         if (!fixSerialMartStatus2 || "".equals(imageSerialMart2)) {
-            logging.error("请设置序列图 2 的序号标识");
-            return false;
+//            logging.error("请设置序列图 2 的序号标识");
+//            return false;
+            //序列图2  可选
+        } else {
+            logging.debug(String.format("序列图 2 标识: %s", imageSerialMart2));
         }
-        logging.debug(String.format("序列图 2 标识: %s", imageSerialMart2));
+
         //
         if (!fixSerialMartStatus3 || "".equals(imageSerialMart3)) {
             //序列图3  可选

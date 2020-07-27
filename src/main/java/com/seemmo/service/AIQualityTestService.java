@@ -257,8 +257,8 @@ public class AIQualityTestService extends BaseService {
             //String imageSerialMart1 = sequenceImageMode.imageSerialText1.getText().toString();
             String imageSerialMart2 = sequencePicRule.imageSerialText2.getText().toString();
             String imageSerialMart3 = sequencePicRule.imageSerialText3.getText().toString();
-            //boolean fixSerialMartStatus1 = sequenceImageMode.fixSerialText1;
-            //boolean fixSerialMartStatus2 = sequenceImageMode.fixSerialText2;
+            //boolean fixSerialMartStatus1 = sequencePicRule.fixSerialText1;
+            boolean fixSerialMartStatus2 = sequencePicRule.fixSerialText2;
             boolean fixSerialMartStatus3 = sequencePicRule.fixSerialText3;
             //序列图1
             byte[] fileByte;
@@ -268,16 +268,18 @@ public class AIQualityTestService extends BaseService {
             argsMap.put(BusinessConstant.CAR_IMG_ONE_DATA, carImg1Data);
             logging.debug("序列图数据1" + "\t" + "base64数据");
 
-            //序列图2
-            elements[serialIndex] = imageSerialMart2;
-            //拼接图片名
-            String imgName2 = String.join(separator, elements) + suffix;
-            File imgFileObj2 = new File(this.imageDirObj.getAbsolutePath() + File.separator + imgName2);
-            fileByte = Files.readAllBytes(imgFileObj2.toPath());
-            // base64 加密
-            String carImg2Data = Base64.getEncoder().encodeToString(fileByte);
-            argsMap.put(BusinessConstant.CAR_IMG_TWO_DATA, carImg2Data);
-            logging.debug("序列图数据2" + "\t" + "base64数据");
+            //序列图2(可选)
+            if (fixSerialMartStatus2 && !"".equals(imageSerialMart2)) {
+                elements[serialIndex] = imageSerialMart2;
+                //拼接图片名
+                String imgName2 = String.join(separator, elements) + suffix;
+                File imgFileObj2 = new File(this.imageDirObj.getAbsolutePath() + File.separator + imgName2);
+                fileByte = Files.readAllBytes(imgFileObj2.toPath());
+                // base64 加密
+                String carImg2Data = Base64.getEncoder().encodeToString(fileByte);
+                argsMap.put(BusinessConstant.CAR_IMG_TWO_DATA, carImg2Data);
+                logging.debug("序列图数据2" + "\t" + "base64数据");
+            }
 
             //序列图3(可选)
             if (fixSerialMartStatus3 && !"".equals(imageSerialMart3)) {
