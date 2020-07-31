@@ -182,11 +182,11 @@ public abstract class BaseService implements IBaseService{
                 int serialIndex = sequencePicRule.getSerialIndex();
                 if (serialIndex > 0) {//有填写索引值
                     String imageSerialMart1 = sequencePicRule.imageSerialText1.getText().toString();
-                    //String imageSerialMart2 = sequenceImageMode.imageSerialText2.getText().toString();
-                    //String imageSerialMart3 = sequenceImageMode.imageSerialText3.getText().toString();
-                    //boolean fixSerialMartStatus1 = sequenceImageMode.fixSerialText1;
-                    //boolean fixSerialMartStatus2 = sequenceImageMode.fixSerialText2;
-                    //boolean fixSerialMartStatus3 = sequenceImageMode.fixSerialText3;
+                    //String imageSerialMart2 = sequencePicRule.imageSerialText2.getText().toString();
+                    //String imageSerialMart3 = sequencePicRule.imageSerialText3.getText().toString();
+                    boolean fixSerialMartStatus1 = sequencePicRule.fixSerialText1;
+                    //boolean fixSerialMartStatus2 = sequencePicRule.fixSerialText2;
+                    //boolean fixSerialMartStatus3 = sequencePicRule.fixSerialText3;
                     String imgName = this.getFileNameNoEx(imgFileObj);//获取不带扩展名的图片名
                     String[] elements = imgName.split(this.separator, -1);
                     String serialMark;
@@ -196,7 +196,7 @@ public abstract class BaseService implements IBaseService{
                         logging.error(String.format("图片序列号索引越界: %s", imgName));
                         return;
                     }
-                    if (imageSerialMart1.equals(serialMark)) {//序列图序号 01
+                    if (fixSerialMartStatus1 && imageSerialMart1.equals(serialMark)) {//序列图序号 01
                         this.imageObjList.add(imgFileObj);
                         this.accessTotal += 1;
                     }
