@@ -106,7 +106,7 @@ public abstract class BaseService implements IBaseService{
         this.getAccessTotal(imageDirObj);
         if (this.accessTotal <= 0) {
             if (imageDataMode.sequenceModeText.isSelected()) {//可能是序列图标识未配置正确
-                logging.error("文件夹中没有图片数据, 请检查序列图规则配置");
+                logging.error("没有检测到文件夹中的图片数据, 请检查序列图规则配置");
             } else {
                 logging.error("文件夹中没有图片数据");
             }
@@ -124,7 +124,9 @@ public abstract class BaseService implements IBaseService{
 
         //6 创建线程池
         int processNum = Integer.parseInt(String.valueOf(ProcessNum.instance.processNumText.getSelectedItem()));
-        executorService = Executors.newFixedThreadPool(processNum);
+        if (executorService == null) {
+            executorService = Executors.newFixedThreadPool(processNum);
+        }
         return true;
     }
 
@@ -178,22 +180,27 @@ public abstract class BaseService implements IBaseService{
             if (imageDataMode.sequenceModeText.isSelected()) {
                 //序列图索引值, 序号标识, 修改标记
                 int serialIndex = sequencePicRule.getSerialIndex();
-                String imageSerialMart1 = sequencePicRule.imageSerialText1.getText().toString();
-//            String imageSerialMart2 = sequenceImageMode.imageSerialText2.getText().toString();
-//            String imageSerialMart3 = sequenceImageMode.imageSerialText3.getText().toString();
-//            boolean fixSerialMartStatus1 = sequenceImageMode.fixSerialText1;
-//            boolean fixSerialMartStatus2 = sequenceImageMode.fixSerialText2;
-//            boolean fixSerialMartStatus3 = sequenceImageMode.fixSerialText3;
-                String imgName = this.getFileNameNoEx(imgFileObj);//获取不带扩展名的图片名
-                String[] elements = imgName.split(this.separator, -1);
-                String serialMark;
-                try {
-                    serialMark = elements[serialIndex];
-                } catch (Exception ex) {
-                    logging.error(String.format("图片序列号索引越界: %s", imgName));
-                    return;
-                }
-                if (imageSerialMart1.equals(serialMark)) {//序列图序号 01
+                if (serialIndex > 0) {//有填写索引值
+                    String imageSerialMart1 = sequencePicRule.imageSerialText1.getText().toString();
+                    //String imageSerialMart2 = sequenceImageMode.imageSerialText2.getText().toString();
+                    //String imageSerialMart3 = sequenceImageMode.imageSerialText3.getText().toString();
+                    //boolean fixSerialMartStatus1 = sequenceImageMode.fixSerialText1;
+                    //boolean fixSerialMartStatus2 = sequenceImageMode.fixSerialText2;
+                    //boolean fixSerialMartStatus3 = sequenceImageMode.fixSerialText3;
+                    String imgName = this.getFileNameNoEx(imgFileObj);//获取不带扩展名的图片名
+                    String[] elements = imgName.split(this.separator, -1);
+                    String serialMark;
+                    try {
+                        serialMark = elements[serialIndex];
+                    } catch (Exception ex) {
+                        logging.error(String.format("图片序列号索引越界: %s", imgName));
+                        return;
+                    }
+                    if (imageSerialMart1.equals(serialMark)) {//序列图序号 01
+                        this.imageObjList.add(imgFileObj);
+                        this.accessTotal += 1;
+                    }
+                } else {//没有填写索引值, 相当于合成图模式
                     this.imageObjList.add(imgFileObj);
                     this.accessTotal += 1;
                 }
@@ -304,8 +311,9 @@ public abstract class BaseService implements IBaseService{
     public boolean checkSerialImgRule(){
         int serialIndex = SequencePicRule.instance.getSerialIndex();
         if (serialIndex < 0) {
-            logging.error("请设置序列图索引值\n");
-            return false;
+            // 单张序列图可以不填写索引值
+//            logging.error("请设置序列图索引值\n");
+//            return false;
         }
         //检查序号标识(至少填写前面两个序号标识)
         String imageSerialMart1 = sequencePicRule.imageSerialText1.getText().toString();
@@ -315,10 +323,12 @@ public abstract class BaseService implements IBaseService{
         String imageSerialMart3 = sequencePicRule.imageSerialText3.getText().toString();
         boolean fixSerialMartStatus3 = sequencePicRule.fixSerialText3;
         if (!fixSerialMartStatus1 || "".equals(imageSerialMart1)) {
-            logging.error("请设置序列图 1 的序号标识");
-            return false;
+//            logging.error("请设置序列图 1 的序号标识");
+//            return false;
+            //序列图1标识  可选
+        } else {
+            logging.debug(String.format("序列图 1 标识: %s", imageSerialMart1));
         }
-        logging.debug(String.format("序列图 1 标识: %s", imageSerialMart1));
 
         //
         if (!fixSerialMartStatus2 || "".equals(imageSerialMart2)) {

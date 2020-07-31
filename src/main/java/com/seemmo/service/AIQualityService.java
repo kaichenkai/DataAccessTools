@@ -315,7 +315,7 @@ public class AIQualityService extends BaseService {
             argsMap.put(BusinessConstant.CAR_IMG_ONE_DATA, carImg1Data);
 
             //序列图2(可选)
-            if (fixSerialMartStatus2 && !"".equals(imageSerialMart2)) {
+            if (fixSerialMartStatus2 && !"".equals(imageSerialMart2) && serialIndex > 0) {
                 elements[serialIndex] = imageSerialMart2;
                 //拼接图片名
                 String imgName2 = String.join(separator, elements) + suffix;
@@ -327,7 +327,7 @@ public class AIQualityService extends BaseService {
             }
 
             //序列图3(可选)
-            if (fixSerialMartStatus3 && !"".equals(imageSerialMart3)) {
+            if (fixSerialMartStatus3 && !"".equals(imageSerialMart3) && serialIndex > 0) {
                 elements[serialIndex] = imageSerialMart3;
                 //拼接图片名
                 String imgName3 = String.join(separator, elements)  + suffix;
